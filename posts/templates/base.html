@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block head_title %}
+            Django 1.9
+        {% endblock head_title %}
+    </title>
+
+
+    <link rel="stylesheet" href="/static/css/base.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <style>
+        {% block style %}
+            body {
+            background-color: #00CCFF;
+                }
+        {% endblock style%}
+    </style>
+</head>
+<body>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+    <div class="container">
+        {% block content %}
+
+
+            <h1>{{title}} is working...</h1>
+
+            <table class="table table-responsive table-bordered">
+            <thead>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Timestamp</th>
+                <th>Updated</th>
+                <th>ID</th>
+                <th>Primary Key</th>
+            </thead>
+
+                {% for obj in queryset %}
+
+            <tbody>
+                <tr>
+                    <td> <a href="{{obj.get_absolute_url}}">{{ obj.title }}</a></td>
+                    <td> {{ obj.content }} </td>
+                    <td> {{ obj.timestamp }} </td>
+                    <td> {{ obj.updated }}</td>
+                    <td> {{ obj.id }}  </td>
+                </tr>
+            </tbody>
+                {% endfor %}
+            </table>
+
+        {% endblock content %}
+    </div>
+
+
+<!-- Latest compiled and minified JavaScript -->
+
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
+
+
+<script>
+    $(document).ready(function(){
+
+        $(".content-markdown").each(function(){
+            var content = $(".this").text()
+            console.log(content)
+            var markedContent = marked(content)
+            console.log(markedContent)
+
+        })
+        
+    })
+</script>
+</body>
+</html>
